@@ -2,12 +2,12 @@ import React from 'react';
 
 import './App.css';
 
-import { TweetsChart } from './components/twitter/twitterChart';
+import Twitter from './components/twitter/twitter';
 
 function App() {
   return (
     <div className="App">
-      < TweetsChart />
+      <Twitter />
     </div>
   );
 }

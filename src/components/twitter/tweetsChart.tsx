@@ -15,7 +15,7 @@ type TweetsData = {
   subject: string[],
   polarity: number[],
   tweet_text: string[],
-  tweet_id: number[],
+  id: number[],
   status: string[],
   created_at: string[],
 }
@@ -33,9 +33,9 @@ export const TweetsChart: React.FC<Props> = (props) => {
     title : {
       text : "Twitter Text"
     },
-    chart: {
-      type: "column"
-    },
+    //chart: {
+      //type: "column"
+    //},
     xAxis: {
       categories : twitterResult?.chart_data.categories,
     },

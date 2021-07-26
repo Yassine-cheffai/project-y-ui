@@ -16,7 +16,7 @@ type TweetsData = {
   subject: string[],
   polarity: number[],
   tweet_text: string[],
-  tweet_id: number[],
+  id: number[],
   status: string[],
   created_at: string[],
 }

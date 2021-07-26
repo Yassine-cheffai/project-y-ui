@@ -1,4 +1,5 @@
 import React from 'react';
+import { DataGrid, GridColDef } from '@material-ui/data-grid';
 
 type Series = {
   name: string,
@@ -12,7 +13,7 @@ type TweetsData = {
   subject: string[],
   polarity: number[],
   tweet_text: string[],
-  tweet_id: number[],
+  id: number[],
   status: string[],
   created_at: string[],
 }
@@ -26,6 +27,39 @@ type Props = {
 
 export const TweetsTable: React.FC<Props> = (props) => {
   const { twitterResult } = props;
+
+  const columns: GridColDef[] = [
+    { field: 'subject', headerName: 'Subject', width: 90 },
+    {
+      field: 'polarity',
+      headerName: 'Polarity',
+      width: 150,
+      editable: true,
+    },
+    {
+      field: 'tweet_text',
+      headerName: 'Tweet Text',
+      width: 150,
+    },
+    {
+      field: 'id',
+      headerName: 'Tweet ID',
+      width: 110,
+    },
+    {
+      field: 'status',
+      headerName: 'Status',
+      type: 'number',
+      width: 110,
+    },
+    {
+      field: 'created_at',
+      headerName: 'Created At',
+      type: 'number',
+      width: 110,
+    },
+  ];
+
   let tweetsRows = [];
   const rowsNumber = twitterResult?.tweets_data.subject.length || 0
   for (let i = 0; i < rowsNumber; i++) {
@@ -34,7 +68,7 @@ export const TweetsTable: React.FC<Props> = (props) => {
         subject: twitterResult?.tweets_data.subject[i],
         polarity: twitterResult?.tweets_data.polarity[i],
         tweet_text: twitterResult?.tweets_data.tweet_text[i],
-        tweet_id: twitterResult?.tweets_data.tweet_id[i],
+        id: twitterResult?.tweets_data.id[i],
         status: twitterResult?.tweets_data.status[i],
         created_at: twitterResult?.tweets_data.created_at[i],
       }
@@ -42,31 +76,14 @@ export const TweetsTable: React.FC<Props> = (props) => {
     )
   }
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Subject</th>
-          <th>Polarity</th>
-          <th>Tweet Text</th>
-          <th>Tweet ID</th>
-          <th>Status</th>
-          <th>Created at</th>
-        </tr>
-      </thead>
-      <tbody>
-        { tweetsRows.map((row) => (
-          <tr key={ row.tweet_id }>
-            <td>{ row.subject }</td>
-            <td>{ row.polarity }</td>
-            <td>{ row.tweet_text }</td>
-            <td>{ row.tweet_id }</td>
-            <td>{ row.status }</td>
-            <td>{ row.created_at }</td>
-          </tr>
-        )
-        )
-        }
-      </tbody>
-    </table>
+    <div style={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={tweetsRows}
+        columns={columns}
+        pageSize={5}
+        checkboxSelection
+        disableSelectionOnClick
+      />
+    </div>
   )
 }

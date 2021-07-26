@@ -44,7 +44,7 @@ export const TweetsChart: React.FC<Props> = (props) => {
     },
     series : twitterResult?.chart_data.series
   }
-
+  
    return (
      <div>
        <h3>Twitter Chart Component</h3>

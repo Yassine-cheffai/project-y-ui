@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { TweetsChart } from './twitterChart';
+import { TweetsChart } from './tweetsChart';
+import { TweetsTable } from './tweetsTable';
 
 
 type Series = {
@@ -47,6 +48,7 @@ const Twitter: React.FC = () => {
     <div>
       <button onClick={ loadtwitterResult }>Load Twitter Result</button>
       <TweetsChart twitterResult={ twitterResult }/>
+      <TweetsTable twitterResult={ twitterResult }/>
     </div>
   )
 }

@@ -29,34 +29,35 @@ export const TweetsTable: React.FC<Props> = (props) => {
   const { twitterResult } = props;
 
   const columns: GridColDef[] = [
-    { field: 'subject', headerName: 'Subject', width: 90 },
-    {
-      field: 'polarity',
-      headerName: 'Polarity',
-      width: 150,
-      editable: true,
-    },
+    //{ field: 'subject', headerName: 'Subject', width: 90 },
+    //{
+      //field: 'polarity',
+      //headerName: 'Polarity',
+      //width: 150,
+      //editable: true,
+    //},
     {
       field: 'tweet_text',
       headerName: 'Tweet Text',
-      width: 150,
+      width: 500,
+      editable: true,
     },
-    {
-      field: 'id',
-      headerName: 'Tweet ID',
-      width: 110,
-    },
+    //{
+      //field: 'id',
+      //headerName: 'Tweet ID',
+      //width: 110,
+    //},
     {
       field: 'status',
       headerName: 'Status',
       type: 'number',
-      width: 110,
+      width: 200,
     },
     {
       field: 'created_at',
       headerName: 'Created At',
       type: 'number',
-      width: 110,
+      width: 200,
     },
   ];
 
@@ -81,7 +82,7 @@ export const TweetsTable: React.FC<Props> = (props) => {
         rows={tweetsRows}
         columns={columns}
         pageSize={5}
-        checkboxSelection
+        //checkboxSelection
         disableSelectionOnClick
       />
     </div>

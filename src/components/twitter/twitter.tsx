@@ -36,7 +36,7 @@ const Twitter: React.FC = () => {
         product_name: 'macbook air',
         days: 1
       },
-      timeout: 300000
+      timeout: 3000000
     })
       .then(function (response) {
         console.log(response.data);

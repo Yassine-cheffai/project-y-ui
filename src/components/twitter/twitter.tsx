@@ -1,56 +1,57 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { TweetsChart } from './tweetsChart';
-import { TweetsTable } from './tweetsTable';
-
+import React, { useState } from "react";
+import axios from "axios";
+import { TweetsChart } from "./tweetsChart";
+import { TweetsTable } from "./tweetsTable";
 
 type Series = {
-  name: string,
-  data: number[]
-}
+  name: string;
+  data: number[];
+};
 type ChartData = {
-  categories: string[],
-  series: Series,
-}
+  categories: string[];
+  series: Series;
+};
 type TweetsData = {
-  subject: string[],
-  polarity: number[],
-  tweet_text: string[],
-  id: number[],
-  status: string[],
-  created_at: string[],
-}
+  subject: string[];
+  polarity: number[];
+  tweet_text: string[];
+  id: number[];
+  status: string[];
+  created_at: string[];
+};
 type TwitterResult = {
-  chart_data: ChartData,
-  tweets_data: TweetsData,
-}
+  chart_data: ChartData;
+  tweets_data: TweetsData;
+};
 
 const Twitter: React.FC = () => {
-  const [twitterResult, settwitterResult] = useState<TwitterResult>()
+  const [twitterResult, settwitterResult] = useState<TwitterResult>();
 
   const loadtwitterResult = () => {
-   axios({
-      method: 'post',
-      url: 'http://127.0.0.1:8000/api/twitter/',
+    axios({
+      method: "post",
+      url: "http://127.0.0.1:8000/api/twitter/",
       data: {
-        product_name: 'macbook air',
-        days: 1
+        product_name: "macbook air",
+        days: 1,
       },
-      timeout: 3000000
+      timeout: 3000000,
     })
-      .then(function (response) {
+      .then(function (response: any) {
         console.log(response.data);
         settwitterResult(response.data);
       })
-      .catch(function (error) { console.log(error) });
-  }
-  return(
+      .catch(function (error: any) {
+        console.log(error);
+      });
+  };
+  return (
     <div>
-      <button onClick={ loadtwitterResult }>Load Twitter Result</button>
-      <TweetsChart twitterResult={ twitterResult }/>
-      <TweetsTable twitterResult={ twitterResult }/>
+      <button onClick={loadtwitterResult}>Load Twitter Result</button>
+      <TweetsChart twitterResult={twitterResult} />
+      <TweetsTable twitterResult={twitterResult} />
     </div>
-  )
-}
+  );
+};
 
 export default Twitter;

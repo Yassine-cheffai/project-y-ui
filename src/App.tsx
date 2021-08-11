@@ -8,13 +8,26 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import Paper from "@material-ui/core/Paper";
 
 import Twitter from "./components/twitter/twitter";
+import PlatformsNavigation from "./components/navigation/platforms";
+import Grid from "@material-ui/core/Grid";
+import TopicFormDialog from "./components/topic/topicFormDialog";
 
+const gridStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.text.secondary,
+    },
+  })
+);
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,6 +58,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function App() {
   const classes = useStyles();
+  const gridClasses = gridStyles();
 
   return (
     <div className={classes.root}>
@@ -52,7 +66,7 @@ export default function App() {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>
-            Permanent drawer
+            Topic 1
           </Typography>
         </Toolbar>
       </AppBar>
@@ -67,30 +81,30 @@ export default function App() {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {["Topic 1", "Topic 2", "Topic 3"].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <TopicFormDialog />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Twitter />
+        <div className={gridClasses.root}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper className={gridClasses.paper}>
+                <PlatformsNavigation />
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper className={gridClasses.paper}>
+                <Twitter />
+              </Paper>
+            </Grid>
+          </Grid>
+        </div>
       </main>
     </div>
   );

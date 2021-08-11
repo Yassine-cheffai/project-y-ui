@@ -47,13 +47,7 @@ export const TweetsChart: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <h3>Twitter Chart Component</h3>
-      {twitterResult?.chart_data.categories.map((categorie) => (
-        <li key={categorie}>{categorie}</li>
-      ))}
-      <div>
-        <HighchartsReact highcharts={Highcharts} options={options} />
-      </div>
+      <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );
 };

@@ -89,7 +89,7 @@ export default function TopicForm() {
     <div>
       <form className={inputClasses.root} noValidate autoComplete="off">
         <div>
-          <TextField id="standard-basic" label="Topic Title" />
+          <TextField id="standard-basic" label="Topic Title" fullWidth />
         </div>
         <div>
           <TextField id="standard-basic" label="Topic Short Description" />

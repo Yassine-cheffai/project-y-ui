@@ -33,7 +33,7 @@ const Twitter: React.FC = () => {
       url: "http://127.0.0.1:8000/api/twitter/",
       data: {
         product_name: "macbook air",
-        days: 7,
+        days: 1,
       },
       timeout: 3000000,
     })

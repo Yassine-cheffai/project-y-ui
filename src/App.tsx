@@ -10,11 +10,15 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Paper from "@material-ui/core/Paper";
+import DeleteIcon from "@material-ui/icons/Delete";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import IconButton from "@material-ui/core/IconButton";
 
 import Twitter from "./components/twitter/twitter";
 import PlatformsNavigation from "./components/navigation/platforms";
 import Grid from "@material-ui/core/Grid";
 import TopicFormDialog from "./components/topic/topicFormDialog";
+import DeleteTopicConfirmation from "./components/dialogs/deleteTopicConfirmation";
 
 const gridStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,6 +63,17 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function App() {
   const classes = useStyles();
   const gridClasses = gridStyles();
+  const [deletetopicDialogOpen, setdeletetopicDialogOpen] =
+    React.useState(false);
+  const [topicToDelete, settopicToDelete] = React.useState("");
+
+  const handleClickdeletetopicDialogOpen = () => {
+    setdeletetopicDialogOpen(true);
+  };
+
+  const handledeletetopicDialogClose = () => {
+    setdeletetopicDialogOpen(false);
+  };
 
   return (
     <div className={classes.root}>
@@ -84,9 +99,24 @@ export default function App() {
           {["Topic 1", "Topic 2", "Topic 3"].map((text, index) => (
             <ListItem button key={text}>
               <ListItemText primary={text} />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete">
+                  <DeleteIcon
+                    onClick={() => {
+                      handleClickdeletetopicDialogOpen();
+                      settopicToDelete(text);
+                    }}
+                  />
+                </IconButton>
+              </ListItemSecondaryAction>
             </ListItem>
           ))}
         </List>
+        <DeleteTopicConfirmation
+          open={deletetopicDialogOpen}
+          handleClose={handledeletetopicDialogClose}
+          topic={topicToDelete}
+        />
         <TopicFormDialog />
       </Drawer>
       <main className={classes.content}>

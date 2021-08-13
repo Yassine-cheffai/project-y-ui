@@ -4,14 +4,9 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Paper, { PaperProps } from "@material-ui/core/Paper";
 import TopicForm from "./topicForm";
 
-function PaperComponent(props: PaperProps) {
-  return <Paper {...props} />;
-}
-
-export default function TopicFormDialog() {
+export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -23,24 +18,22 @@ export default function TopicFormDialog() {
   };
 
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add new Topic
+        Add New Topic
       </Button>
       <Dialog
+        fullWidth={true}
         open={open}
         onClose={handleClose}
-        PaperComponent={PaperComponent}
-        aria-labelledby="draggable-dialog-title"
+        aria-labelledby="form-dialog-title"
       >
-        <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-          Add New Topic
-        </DialogTitle>
+        <DialogTitle id="form-dialog-title">Add New Topic</DialogTitle>
         <DialogContent>
           <TopicForm />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
           <Button onClick={handleClose} color="primary">

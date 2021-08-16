@@ -100,13 +100,15 @@ export default function App() {
             <ListItem button key={text}>
               <ListItemText primary={text} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon
-                    onClick={() => {
-                      handleClickdeletetopicDialogOpen();
-                      settopicToDelete(text);
-                    }}
-                  />
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => {
+                    handleClickdeletetopicDialogOpen();
+                    settopicToDelete(text);
+                  }}
+                >
+                  <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>

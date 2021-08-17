@@ -30,7 +30,7 @@ const Twitter: React.FC = () => {
   const loadtwitterResult = () => {
     axios({
       method: "post",
-      url: "http://127.0.0.1:8000/api/twitter/",
+      url: "https://project-y-backend.azurewebsites.net/api/twitter/",
       data: {
         product_name: "macbook air",
         days: 1,

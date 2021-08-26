@@ -6,7 +6,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Paper from "@material-ui/core/Paper";
@@ -93,8 +92,10 @@ export default function App() {
         }}
         anchor="left"
       >
+        <div style={{ textAlign: "center", color: "#3F51B5" }}>
+          <h1>Topic Tracker</h1>
+        </div>
         <div className={classes.toolbar} />
-        <Divider />
         <List>
           {["Topic 1", "Topic 2", "Topic 3"].map((text, index) => (
             <ListItem button key={text}>

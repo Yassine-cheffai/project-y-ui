@@ -130,6 +130,7 @@ export default function App() {
             bottom: 0,
             textAlign: "center",
             paddingBottom: 10,
+            width: "inherit",
           }}
         >
           <ListItem button key={"user"}>

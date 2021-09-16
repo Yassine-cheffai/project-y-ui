@@ -62,7 +62,7 @@ const DashboardButton = (props: any) => {
 };
 export default function LandingPage(props: Props) {
   const classes = useStyles();
-  const [isLoggedIn, setisLoggedIn] = useState(true);
+  const [isLoggedIn] = useState(true);
 
   return (
     <div className={classes.root}>

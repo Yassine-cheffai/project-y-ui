@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {}
 
-const SigningButtons = (props: any) => {
+export function SigningButtons(props: any) {
   return (
     <div
       className={props.styling}
@@ -54,7 +54,7 @@ const SigningButtons = (props: any) => {
       </Button>
     </div>
   );
-};
+}
 
 const DashboardButton = (props: any) => {
   return (

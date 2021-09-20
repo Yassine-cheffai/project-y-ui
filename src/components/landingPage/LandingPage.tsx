@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { IntroductionSlideShow } from "./Carousel";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,10 +37,20 @@ const SigningButtons = (props: any) => {
       }}
     >
       <Button variant="contained" color="default">
-        Sign In
+        <Link
+          to="/signin"
+          style={{ color: "inherit", textDecoration: "inherit" }}
+        >
+          Sign In
+        </Link>
       </Button>
       <Button variant="contained" color="default">
-        Sign Up
+        <Link
+          to="/signup"
+          style={{ color: "inherit", textDecoration: "inherit" }}
+        >
+          Sign Up
+        </Link>
       </Button>
     </div>
   );
@@ -55,34 +66,52 @@ const DashboardButton = (props: any) => {
       }}
     >
       <Button variant="contained" color="default">
-        DashBoard
+        <Link
+          to="/dashboard"
+          style={{ color: "inherit", textDecoration: "inherit" }}
+        >
+          DashBoard
+        </Link>
       </Button>
+    </div>
+  );
+};
+
+const Contact = () => {
+  return (
+    <div style={{ backgroundColor: "#3f52b5", textAlign: "center" }}>
+      <p style={{ color: "white", padding: "10px" }}>
+        Contact: yacincheffai@gmail.com
+      </p>
     </div>
   );
 };
 export default function LandingPage(props: Props) {
   const classes = useStyles();
-  const [isLoggedIn] = useState(true);
+  const [isLoggedIn] = useState(false);
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed">
-        <Toolbar>
-          <Typography variant="h6" noWrap>
-            Topic Tracker
-          </Typography>
-          {isLoggedIn ? (
-            <DashboardButton styling={classes.root} />
-          ) : (
-            <SigningButtons styling={classes.root} />
-          )}
-        </Toolbar>
-      </AppBar>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <IntroductionSlideShow />
-      </main>
+    <div>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="fixed">
+          <Toolbar>
+            <Typography variant="h6" noWrap>
+              Topic Tracker
+            </Typography>
+            {isLoggedIn ? (
+              <DashboardButton styling={classes.root} />
+            ) : (
+              <SigningButtons styling={classes.root} />
+            )}
+          </Toolbar>
+        </AppBar>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <IntroductionSlideShow />
+        </main>
+      </div>
+      <Contact />
     </div>
   );
 }

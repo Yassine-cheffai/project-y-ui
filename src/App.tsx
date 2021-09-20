@@ -19,6 +19,7 @@ import Grid from "@material-ui/core/Grid";
 import TopicFormDialog from "./components/topic/topicFormDialog";
 import DeleteTopicConfirmation from "./components/dialogs/deleteTopicConfirmation";
 import UserSetting from "./components/user/userSetting";
+import { Link } from "react-router-dom";
 
 const gridStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -94,7 +95,14 @@ export default function App() {
         anchor="left"
       >
         <div style={{ textAlign: "center", color: "#3F51B5" }}>
-          <h1>Topic Tracker</h1>
+          <h1>
+            <Link
+              to="/"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              Topic Tracker
+            </Link>
+          </h1>
         </div>
         <div className={classes.toolbar} />
         <List>

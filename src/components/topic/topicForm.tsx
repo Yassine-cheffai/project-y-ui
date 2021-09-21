@@ -1,129 +1,87 @@
 import React from "react";
-import {
-  createStyles,
-  makeStyles,
-  useTheme,
-  Theme,
-} from "@material-ui/core/styles";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import Chip from "@material-ui/core/Chip";
-
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-
-const inputuseStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-      },
-    },
-  })
-);
+import Container from "@material-ui/core/Container";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-      maxWidth: 300,
-    },
-    chips: {
+    root: {
       display: "flex",
-      flexWrap: "wrap",
+      "& > *": {
+        margin: theme.spacing(1),
+      },
     },
-    chip: {
-      margin: 2,
+    paper: {
+      marginTop: theme.spacing(0),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
     },
-    noLabel: {
-      marginTop: theme.spacing(3),
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(0),
+    },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(0),
+    },
+    checkboxes: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space - between",
     },
   })
 );
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+interface Props {}
 
-const names = [
-  "Facebook",
-  "Twitter",
-  "Instagram",
-  "LinkedIn",
-  "Reddit",
-  "Quora",
-  "Youtube",
-];
-
-function getStyles(name: string, personName: string[], theme: Theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-export default function TopicForm() {
+export default function Signup(props: Props) {
   const classes = useStyles();
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setPersonName(event.target.value as string[]);
-  };
-
-  const inputClasses = inputuseStyles();
   return (
     <div>
-      <form className={inputClasses.root} noValidate autoComplete="off">
-        <div>
-          <TextField id="standard-basic" label="Topic Title" fullWidth />
-        </div>
-        <div>
-          <TextField id="standard-basic" label="Topic Short Description" />
-        </div>
-      </form>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-chip-label">Track on:</InputLabel>
-        <Select
-          labelId="demo-mutiple-chip-label"
-          id="demo-mutiple-chip"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<Input id="select-multiple-chip" />}
-          renderValue={(selected) => (
-            <div className={classes.chips}>
-              {(selected as string[]).map((value) => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
+      <div className={classes.root}>
+        <main className={classes.content}>
+          <Container component="main" maxWidth="xs">
+            <div className={classes.paper}>
+              <form className={classes.form} noValidate>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="title"
+                      label="Topic Title"
+                      name="title"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="description"
+                      label="Short Description"
+                      id="description"
+                    />
+                  </Grid>
+                  <div>
+                    <h3>Track on:</h3>
+                    <Checkbox color="primary" /> Twitter
+                    <br />
+                    <Checkbox color="primary" /> Reddit
+                    <br />
+                    <Checkbox color="primary" /> Quora
+                  </div>
+                </Grid>
+              </form>
             </div>
-          )}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+          </Container>
+        </main>
+      </div>
     </div>
   );
 }

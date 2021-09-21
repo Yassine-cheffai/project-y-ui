@@ -4,12 +4,13 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import { SigningButtons } from "./LandingPage";
-import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
+import Container from "@material-ui/core/Container";
+import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,18 +20,28 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: theme.spacing(1),
       },
     },
-    textFieldRoot: {
-      "& .MuiTextField-root": {
-        margin: theme.spacing(1),
-        width: "25ch",
-      },
+    paper: {
+      marginTop: theme.spacing(8),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
     },
     // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
-      textAlign: "center",
     },
   })
 );
@@ -59,30 +70,56 @@ export default function Signin(props: Props) {
         </AppBar>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Grid container spacing={3}>
-            <Grid item xs={4}></Grid>
-            <Grid item xs={4}>
-              <Paper>
-                <form
-                  className={classes.textFieldRoot}
-                  noValidate
-                  autoComplete="off"
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}></Avatar>
+              <Typography component="h1" variant="h5">
+                Sign In
+              </Typography>
+              <form className={classes.form} noValidate>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                    />
+                  </Grid>
+                </Grid>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
                 >
-                  <TextField id="standard-basic" label="e-mail" />
-                  <TextField
-                    id="standard-basic"
-                    label="password"
-                    type="password"
-                    autoComplete="current-password"
-                  />
-                  <Button variant="contained" color="primary">
-                    Sign In
-                  </Button>
-                </form>
-              </Paper>
-            </Grid>
-            <Grid item xs={4}></Grid>
-          </Grid>
+                  Sign In
+                </Button>
+                <Grid container justify="flex-end">
+                  <Grid item>
+                    <Link to="/signup">Don't have an account yet? Sign up</Link>
+                  </Grid>
+                </Grid>
+              </form>
+            </div>
+          </Container>
         </main>
       </div>
     </div>

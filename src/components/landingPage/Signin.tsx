@@ -103,18 +103,28 @@ export default function Signin(props: Props) {
                     />
                   </Grid>
                 </Grid>
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
+                <Link
+                  to="/dashboard"
+                  style={{ color: "inherit", textDecoration: "inherit" }}
                 >
-                  Sign In
-                </Button>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                  >
+                    Sign In
+                  </Button>
+                </Link>
                 <Grid container justify="flex-end">
                   <Grid item>
-                    <Link to="/signup">Don't have an account yet? Sign up</Link>
+                    <Link
+                      to="/signup"
+                      style={{ color: "inherit", textDecoration: "inherit" }}
+                    >
+                      Don't have an account yet? Sign up
+                    </Link>
                   </Grid>
                 </Grid>
               </form>

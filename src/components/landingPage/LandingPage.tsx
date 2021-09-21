@@ -36,22 +36,22 @@ export function SigningButtons(props: any) {
         marginRight: 0,
       }}
     >
-      <Button variant="contained" color="default">
-        <Link
-          to="/signin"
-          style={{ color: "inherit", textDecoration: "inherit" }}
-        >
+      <Link
+        to="/signin"
+        style={{ color: "inherit", textDecoration: "inherit" }}
+      >
+        <Button variant="contained" color="default">
           Sign In
-        </Link>
-      </Button>
-      <Button variant="contained" color="default">
-        <Link
-          to="/signup"
-          style={{ color: "inherit", textDecoration: "inherit" }}
-        >
+        </Button>
+      </Link>
+      <Link
+        to="/signup"
+        style={{ color: "inherit", textDecoration: "inherit" }}
+      >
+        <Button variant="contained" color="default">
           Sign Up
-        </Link>
-      </Button>
+        </Button>
+      </Link>
     </div>
   );
 }

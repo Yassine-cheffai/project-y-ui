@@ -75,6 +75,11 @@ export default function Signup(props: Props) {
                     <Checkbox color="primary" /> Reddit
                     <br />
                     <Checkbox color="primary" /> Quora
+                    <br />
+                    <Checkbox color="primary" disabled /> Facebook (coming soon)
+                    <br />
+                    <Checkbox color="primary" disabled /> Instagram (coming
+                    soon)
                   </div>
                 </Grid>
               </form>

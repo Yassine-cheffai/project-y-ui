@@ -46,3 +46,7 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 url => https://green-pebble-00d610810.azurestaticapps.net
+
+useful links:
+https://pythonrepo.com/repo/Instagram-python-instagram-python-third-party-apis-wrappers
+https://medium.com/@ryanchenkie_40935/react-authentication-how-to-store-jwt-in-a-cookie-346519310e81

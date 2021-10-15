@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,6 +13,8 @@ import { FormControlLabel } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,6 +54,28 @@ interface Props {}
 
 export default function Signup(props: Props) {
   const classes = useStyles();
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  let history = useHistory();
+
+  const submit = () => {
+    axios
+      .post("http://127.0.0.1:8000/api/signup/", {
+        firstName,
+        lastName,
+        email,
+        password,
+      })
+      .then((result) => {
+        console.log(result);
+        history.push("/signin");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -90,6 +114,10 @@ export default function Signup(props: Props) {
                       fullWidth
                       id="firstName"
                       label="First Name"
+                      value={firstName}
+                      onChange={(event) => {
+                        setfirstName(event.target.value);
+                      }}
                       autoFocus
                     />
                   </Grid>
@@ -102,6 +130,10 @@ export default function Signup(props: Props) {
                       label="Last Name"
                       name="lastName"
                       autoComplete="lname"
+                      value={lastName}
+                      onChange={(event) => {
+                        setlastName(event.target.value);
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -113,6 +145,10 @@ export default function Signup(props: Props) {
                       label="Email Address"
                       name="email"
                       autoComplete="email"
+                      value={email}
+                      onChange={(event) => {
+                        setEmail(event.target.value);
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -125,6 +161,10 @@ export default function Signup(props: Props) {
                       type="password"
                       id="password"
                       autoComplete="current-password"
+                      value={password}
+                      onChange={(event) => {
+                        setPassword(event.target.value);
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -137,11 +177,12 @@ export default function Signup(props: Props) {
                   </Grid>
                 </Grid>
                 <Button
-                  type="submit"
+                  //type="submit"
                   fullWidth
                   variant="contained"
                   color="primary"
                   className={classes.submit}
+                  onClick={submit}
                 >
                   Sign Up
                 </Button>

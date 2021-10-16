@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -11,6 +11,7 @@ import Container from "@material-ui/core/Container";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,6 +51,21 @@ interface Props {}
 
 export default function Signin(props: Props) {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submit = () => {
+    console.log(email);
+    console.log(password);
+    axios
+      .post("http://127.0.0.1:8000/api/signin/", { email, password })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -88,6 +104,9 @@ export default function Signin(props: Props) {
                       label="Email Address"
                       name="email"
                       autoComplete="email"
+                      onChange={(event) => {
+                        setEmail(event.target.value);
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -100,6 +119,9 @@ export default function Signin(props: Props) {
                       type="password"
                       id="password"
                       autoComplete="current-password"
+                      onChange={(event) => {
+                        setPassword(event.target.value);
+                      }}
                     />
                   </Grid>
                 </Grid>
@@ -108,11 +130,12 @@ export default function Signin(props: Props) {
                   style={{ color: "inherit", textDecoration: "inherit" }}
                 >
                   <Button
-                    type="submit"
+                    //type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
                     className={classes.submit}
+                    onClick={submit}
                   >
                     Sign In
                   </Button>

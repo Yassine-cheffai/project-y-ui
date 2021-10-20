@@ -10,8 +10,13 @@ import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import axios from "axios";
+
+function Alert(props: AlertProps) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,6 +58,8 @@ export default function Signin(props: Props) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [displayMessageError, setdisplayMessageError] = useState(false);
+  let history = useHistory();
 
   const submit = () => {
     console.log(email);
@@ -61,9 +68,12 @@ export default function Signin(props: Props) {
       .post("http://127.0.0.1:8000/api/signin/", { email, password })
       .then((response) => {
         console.log(response);
+        history.push("/dashboard");
       })
       .catch((error) => {
+        //show error
         console.log(error);
+        setdisplayMessageError(true);
       });
   };
 
@@ -125,21 +135,16 @@ export default function Signin(props: Props) {
                     />
                   </Grid>
                 </Grid>
-                <Link
-                  to="/dashboard"
-                  style={{ color: "inherit", textDecoration: "inherit" }}
+                <Button
+                  //type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={submit}
                 >
-                  <Button
-                    //type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    onClick={submit}
-                  >
-                    Sign In
-                  </Button>
-                </Link>
+                  Sign In
+                </Button>
                 <Grid container justify="flex-end">
                   <Grid item>
                     <Link
@@ -152,6 +157,11 @@ export default function Signin(props: Props) {
                 </Grid>
               </form>
             </div>
+            {displayMessageError ? (
+              <Alert severity="warning">Login Error</Alert>
+            ) : (
+              ""
+            )}
           </Container>
         </main>
       </div>

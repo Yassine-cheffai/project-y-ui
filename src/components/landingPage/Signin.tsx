@@ -64,8 +64,13 @@ export default function Signin(props: Props) {
   const submit = () => {
     console.log(email);
     console.log(password);
+    console.log(process.env.REACT_APP_BACKEND_URL);
     axios
-      .post("http://127.0.0.1:8000/api/signin/", { email, password })
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/signin/`,
+        { email, password },
+        { headers: { Authorization: "Bearer token123" } }
+      )
       .then((response) => {
         console.log(response);
         history.push("/dashboard");

@@ -61,15 +61,15 @@ export default function Signup(props: Props) {
 
   const submit = () => {
     axios
-      .post("http://127.0.0.1:8000/api/signup/", {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/api/signup/`, {
         firstName,
         lastName,
         email,
         password,
       })
-      .then((result) => {
-        console.log(result);
-        history.push("/signin");
+      .then((response) => {
+        localStorage.setItem("token", response.data.token);
+        history.push("/dashboard");
       })
       .catch((error) => {
         console.log(error);

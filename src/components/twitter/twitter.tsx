@@ -28,15 +28,16 @@ const Twitter: React.FC = () => {
   const [twitterResult, settwitterResult] = useState<TwitterResult>();
 
   const loadtwitterResult = () => {
-    axios({
-      method: "post",
-      url: "https://project-y-backend.azurewebsites.net/api/twitter/",
-      data: {
-        product_name: "macbook air",
-        days: 1,
-      },
-      timeout: 3000000,
-    })
+    let token = localStorage.getItem("token");
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/twitter/`,
+        {
+          product_name: "macbook air",
+          days: 1,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
       .then(function (response: any) {
         console.log(response.data);
         settwitterResult(response.data);

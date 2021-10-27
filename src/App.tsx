@@ -18,8 +18,8 @@ import PlatformsNavigation from "./components/navigation/platforms";
 import Grid from "@material-ui/core/Grid";
 import TopicFormDialog from "./components/topic/topicFormDialog";
 import DeleteTopicConfirmation from "./components/dialogs/deleteTopicConfirmation";
-import UserSetting from "./components/user/userSetting";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 const gridStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,6 +67,7 @@ export default function App() {
   const [deletetopicDialogOpen, setdeletetopicDialogOpen] =
     React.useState(false);
   const [topicToDelete, settopicToDelete] = React.useState("");
+  let history = useHistory();
 
   const handleClickdeletetopicDialogOpen = () => {
     setdeletetopicDialogOpen(true);
@@ -140,7 +141,16 @@ export default function App() {
             width: "inherit",
           }}
         >
-          <UserSetting />
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => {
+              localStorage.removeItem("token");
+              history.push("/");
+            }}
+          >
+            Logout
+          </Button>
         </div>
       </Drawer>
       <main className={classes.content}>

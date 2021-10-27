@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -88,7 +88,6 @@ const Contact = () => {
 };
 export default function LandingPage(props: Props) {
   const classes = useStyles();
-  const [isLoggedIn] = useState(false);
 
   return (
     <div>
@@ -99,7 +98,7 @@ export default function LandingPage(props: Props) {
             <Typography variant="h6" noWrap>
               Topic Tracker
             </Typography>
-            {isLoggedIn ? (
+            {localStorage.getItem("token") ? (
               <DashboardButton styling={classes.root} />
             ) : (
               <SigningButtons styling={classes.root} />

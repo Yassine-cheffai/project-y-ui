@@ -68,13 +68,10 @@ export default function Signin(props: Props) {
         password,
       })
       .then((response) => {
-        console.log(response);
-        history.push("/dashboard");
         localStorage.setItem("token", response.data.token);
+        history.push("/dashboard");
       })
       .catch((error) => {
-        //show error
-        console.log(error);
         setdisplayMessageError(true);
       });
   };

@@ -77,6 +77,10 @@ export default function App() {
     setdeletetopicDialogOpen(false);
   };
 
+  if (!localStorage.getItem("token")) {
+    history.push("/");
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />

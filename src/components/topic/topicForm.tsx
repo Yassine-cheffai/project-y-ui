@@ -35,10 +35,31 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Props {}
+interface Props {
+  title: string;
+  setTitle: any;
+  description: string;
+  setDescription: any;
+  tracks: string[];
+  setTracks: any;
+}
 
-export default function Signup(props: Props) {
+export default function TopicForm(props: Props) {
   const classes = useStyles();
+
+  const handleCheckBoxChange = (event: any, track: any) => {
+    if (event.target.checked) {
+      props.tracks.push(track);
+      props.setTracks(props.tracks);
+    } else {
+      const index = props.tracks.indexOf(track);
+      if (index > -1) {
+        props.tracks.splice(index, 1);
+      }
+      props.setTracks(props.tracks);
+    }
+    console.log(props.tracks);
+  };
 
   return (
     <div>
@@ -56,6 +77,10 @@ export default function Signup(props: Props) {
                       id="title"
                       label="Topic Title"
                       name="title"
+                      value={props.title}
+                      onChange={(event) => {
+                        props.setTitle && props.setTitle(event.target.value);
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -66,15 +91,38 @@ export default function Signup(props: Props) {
                       name="description"
                       label="Short Description"
                       id="description"
+                      value={props.description}
+                      onChange={(event) => {
+                        props.setDescription &&
+                          props.setDescription(event.target.value);
+                      }}
                     />
                   </Grid>
                   <div>
                     <h3>Track on:</h3>
-                    <Checkbox color="primary" /> Twitter
+                    <Checkbox
+                      color="primary"
+                      onChange={(event) => {
+                        handleCheckBoxChange(event, "twitter");
+                      }}
+                    />
+                    Twitter
                     <br />
-                    <Checkbox color="primary" /> Reddit
+                    <Checkbox
+                      color="primary"
+                      onChange={(event) => {
+                        handleCheckBoxChange(event, "reddit");
+                      }}
+                    />
+                    Reddit
                     <br />
-                    <Checkbox color="primary" /> Quora
+                    <Checkbox
+                      color="primary"
+                      onChange={(event) => {
+                        handleCheckBoxChange(event, "quora");
+                      }}
+                    />
+                    Quora
                     <br />
                     <Checkbox color="primary" disabled /> Facebook (coming soon)
                     <br />

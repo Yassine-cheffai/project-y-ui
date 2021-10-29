@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -20,6 +20,7 @@ import TopicFormDialog from "./components/topic/topicFormDialog";
 import DeleteTopicConfirmation from "./components/dialogs/deleteTopicConfirmation";
 import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 
 const gridStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,8 +67,24 @@ export default function App() {
   const gridClasses = gridStyles();
   const [deletetopicDialogOpen, setdeletetopicDialogOpen] =
     React.useState(false);
-  const [topicToDelete, settopicToDelete] = React.useState("");
+  const [topicToDelete, settopicToDelete] = useState();
+  const [topics, setTopics] = useState([]);
   let history = useHistory();
+
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/get_topics/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(function (response: any) {
+        setTopics(response.data.topics);
+      })
+      .catch(function (error: any) {
+        console.log(error);
+        setTopics([]);
+      });
+  });
 
   const handleClickdeletetopicDialogOpen = () => {
     setdeletetopicDialogOpen(true);
@@ -111,16 +128,16 @@ export default function App() {
         </div>
         <div className={classes.toolbar} />
         <List>
-          {["Topic 1", "Topic 2", "Topic 3"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
+          {topics.map((topic: any, index) => (
+            <ListItem button key={topic.topic_id}>
+              <ListItemText primary={topic.topic_title} />
               <ListItemSecondaryAction>
                 <IconButton
                   edge="end"
                   aria-label="delete"
                   onClick={() => {
                     handleClickdeletetopicDialogOpen();
-                    settopicToDelete(text);
+                    settopicToDelete(topic.topic_id);
                   }}
                 >
                   <DeleteIcon />

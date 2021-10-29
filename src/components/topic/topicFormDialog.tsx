@@ -22,9 +22,6 @@ export default function FormDialog() {
     setOpen(false);
   };
   const handleAdd = () => {
-    console.log(title);
-    console.log(description);
-    console.log(tracks);
     const token = localStorage.getItem("token");
     axios
       .post(

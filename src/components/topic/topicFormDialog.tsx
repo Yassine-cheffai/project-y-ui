@@ -7,7 +7,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TopicForm from "./topicForm";
 import axios from "axios";
 
-export default function FormDialog() {
+interface Props {
+  handleTopicsUpdate: any;
+}
+
+export default function FormDialog(props: Props) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -32,6 +36,7 @@ export default function FormDialog() {
       .then((response) => {
         setOpen(false);
         console.log("success");
+        props.handleTopicsUpdate();
       })
       .catch((error) => {
         console.log(error);

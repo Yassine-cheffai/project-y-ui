@@ -65,13 +65,17 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function App() {
   const classes = useStyles();
   const gridClasses = gridStyles();
-  const [deletetopicDialogOpen, setdeletetopicDialogOpen] =
-    React.useState(false);
+  const [deletetopicDialogOpen, setdeletetopicDialogOpen] = useState(false);
   const [topicToDelete, settopicToDelete] = useState();
+  const [topicToDeleteTitle, settopicToDeleteTitle] = useState();
   const [topics, setTopics] = useState([]);
   let history = useHistory();
 
   useEffect(() => {
+    handleTopicsUpdate();
+  }, [topics]);
+
+  const handleTopicsUpdate = () => {
     let token = localStorage.getItem("token");
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/api/get_topics/`, {
@@ -82,9 +86,9 @@ export default function App() {
       })
       .catch(function (error: any) {
         console.log(error);
-        setTopics([]);
+        //setTopics([]);
       });
-  });
+  };
 
   const handleClickdeletetopicDialogOpen = () => {
     setdeletetopicDialogOpen(true);
@@ -138,6 +142,7 @@ export default function App() {
                   onClick={() => {
                     handleClickdeletetopicDialogOpen();
                     settopicToDelete(topic.topic_id);
+                    settopicToDeleteTitle(topic.topic_title);
                   }}
                 >
                   <DeleteIcon />
@@ -150,8 +155,10 @@ export default function App() {
           open={deletetopicDialogOpen}
           handleClose={handledeletetopicDialogClose}
           topic={topicToDelete}
+          topicTitle={topicToDeleteTitle}
+          handleTopicsUpdate={handleTopicsUpdate}
         />
-        <TopicFormDialog />
+        <TopicFormDialog handleTopicsUpdate={handleTopicsUpdate} />
 
         <div
           style={{

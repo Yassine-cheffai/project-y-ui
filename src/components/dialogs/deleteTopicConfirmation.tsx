@@ -3,10 +3,27 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import axios from "axios";
 
 export default function DeleteTopicConfirmation(props: any) {
   const handleTopicDelete = () => {
     console.log("topic deletion");
+    console.log(props.topicTitle);
+    console.log(props.topic);
+    let token = localStorage.getItem("token");
+    axios
+      .delete(
+        `${process.env.REACT_APP_BACKEND_URL}/api/delete_topic/${props.topic}/`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then(function (response: any) {
+        props.handleTopicsUpdate();
+      })
+      .catch(function (error: any) {
+        console.log(error);
+      });
   };
   return (
     <Dialog
@@ -16,7 +33,7 @@ export default function DeleteTopicConfirmation(props: any) {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        {`Are you sure you want to delete this topic (${props.topic})?`}
+        {`Are you sure you want to delete this topic (${props.topicTitle})?`}
       </DialogTitle>
       <DialogActions>
         <Button onClick={props.handleClose} color="primary">

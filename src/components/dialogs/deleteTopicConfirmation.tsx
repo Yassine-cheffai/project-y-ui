@@ -7,9 +7,6 @@ import axios from "axios";
 
 export default function DeleteTopicConfirmation(props: any) {
   const handleTopicDelete = () => {
-    console.log("topic deletion");
-    console.log(props.topicTitle);
-    console.log(props.topic);
     let token = localStorage.getItem("token");
     axios
       .delete(

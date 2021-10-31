@@ -73,7 +73,7 @@ export default function App() {
 
   useEffect(() => {
     handleTopicsUpdate();
-  }, [topics]);
+  }, topics);
 
   const handleTopicsUpdate = () => {
     let token = localStorage.getItem("token");

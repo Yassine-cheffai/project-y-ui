@@ -73,7 +73,7 @@ export default function App() {
 
   useEffect(() => {
     handleTopicsUpdate();
-  }, topics);
+  }, []);
 
   const handleTopicsUpdate = () => {
     let token = localStorage.getItem("token");
@@ -87,6 +87,23 @@ export default function App() {
       .catch(function (error: any) {
         console.log(error);
         //setTopics([]);
+      });
+  };
+
+  const fetchTopicData = (topicID: string) => {
+    let token = localStorage.getItem("token");
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/get_topic_data/${topicID}/`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then(function (response: any) {
+        console.log(response.data);
+      })
+      .catch(function (error: any) {
+        console.log(error);
       });
   };
 
@@ -133,7 +150,14 @@ export default function App() {
         <div className={classes.toolbar} />
         <List>
           {topics.map((topic: any, index) => (
-            <ListItem button key={topic.topic_id}>
+            <ListItem
+              button
+              key={topic.topic_id}
+              onClick={() => {
+                console.log(topic.topic_id);
+                fetchTopicData(topic.topic_id);
+              }}
+            >
               <ListItemText primary={topic.topic_title} />
               <ListItemSecondaryAction>
                 <IconButton
